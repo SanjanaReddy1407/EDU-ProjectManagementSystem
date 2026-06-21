@@ -1,0 +1,193 @@
+{
+  "2023": {
+    "locked": true,
+    "groups": [
+      {
+        "id": 1,
+        "leader_uid": "50008",
+        "members": {
+          "B2": "50029",
+          "B3": "50061",
+          "B4": "50031"
+        },
+        "mentor_id": "9",
+        "preferences": {
+          "1": 6,
+          "2": 4,
+          "3": 5,
+          "4": 3,
+          "5": 7,
+          "6": 8,
+          "7": 9,
+          "8": 2,
+          "9": 1
+        }
+      },
+      {
+        "id": 2,
+        "leader_uid": "50015",
+        "members": {
+          "B2": "50005",
+          "B3": "50060",
+          "B4": "50040"
+        },
+        "mentor_id": "1",
+        "preferences": {}
+      },
+      {
+        "id": 3,
+        "leader_uid": "50006",
+        "members": {
+          "B2": "50030",
+          "B3": "50063",
+          "B4": "50041"
+        },
+        "mentor_id": "2",
+        "preferences": {}
+      },
+      {
+        "id": 4,
+        "leader_uid": "50023",
+        "members": {
+          "B2": "50034",
+          "B3": "50033",
+          "B4": "50001"
+        },
+        "mentor_id": "3",
+        "preferences": {}
+      },
+      {
+        "id": 5,
+        "leader_uid": "50011",
+        "members": {
+          "B2": "50007",
+          "B3": "50022",
+          "B4": "50039"
+        },
+        "mentor_id": "4",
+        "preferences": {}
+      },
+      {
+        "id": 6,
+        "leader_uid": "50017",
+        "members": {
+          "B2": "50014",
+          "B3": "50027",
+          "B4": "50046"
+        },
+        "mentor_id": "5",
+        "preferences": {}
+      },
+      {
+        "id": 7,
+        "leader_uid": "50038",
+        "members": {
+          "B2": "50020",
+          "B3": "50057",
+          "B4": "50021"
+        },
+        "mentor_id": "6",
+        "preferences": {}
+      },
+      {
+        "id": 8,
+        "leader_uid": "50003",
+        "members": {
+          "B2": "50018",
+          "B3": "50042",
+          "B4": "50009"
+        },
+        "mentor_id": "7",
+        "preferences": {}
+      },
+      {
+        "id": 9,
+        "leader_uid": "50002",
+        "members": {
+          "B2": "50045",
+          "B3": "50035",
+          "B4": "50062"
+        },
+        "mentor_id": "8",
+        "preferences": {}
+      },
+      {
+        "id": 10,
+        "leader_uid": "50010",
+        "members": {
+          "B2": "50058",
+          "B3": "50048",
+          "B4": "50019"
+        },
+        "mentor_id": "1",
+        "preferences": {}
+      },
+      {
+        "id": 11,
+        "leader_uid": "50013",
+        "members": {
+          "B2": "50051",
+          "B3": "50025",
+          "B4": "50032"
+        },
+        "mentor_id": "2",
+        "preferences": {}
+      },
+      {
+        "id": 12,
+        "leader_uid": "50036",
+        "members": {
+          "B2": "50052",
+          "B3": "50059",
+          "B4": "50054"
+        },
+        "mentor_id": "3",
+        "preferences": {}
+      },
+      {
+        "id": 13,
+        "leader_uid": "50056",
+        "members": {
+          "B2": "50028",
+          "B3": "50055",
+          "B4": "50044"
+        },
+        "mentor_id": "4",
+        "preferences": {}
+      },
+      {
+        "id": 14,
+        "leader_uid": "50049",
+        "members": {
+          "B2": "50053",
+          "B3": "50047",
+          "B4": "50016"
+        },
+        "mentor_id": "5",
+        "preferences": {}
+      },
+      {
+        "id": 15,
+        "leader_uid": "50050",
+        "members": {
+          "B2": "50043",
+          "B3": "50012",
+          "B4": "50026"
+        },
+        "mentor_id": "6",
+        "preferences": {}
+      },
+      {
+        "id": 16,
+        "leader_uid": "50024",
+        "members": {
+          "B2": "50004",
+          "B3": "50037",
+          "B4": null
+        },
+        "mentor_id": "7",
+        "preferences": {}
+      }
+    ]
+  }
+}
