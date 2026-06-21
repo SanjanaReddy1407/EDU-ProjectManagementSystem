@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Batches Preview - PMS</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --accent-color: #00bfff;
+            --bg-dark: #0b1120;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg-dark);
+            color: #e0e6f1;
+            overflow-x: hidden;
+        }
+
+        .bg-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, #19032a 0%, rgb(53, 22, 99) 40%, #678fd4 100%);
+            z-index: -2;
+        }
+
+        /* Header */
+        .main-header {
+            position: fixed; top: 0; left: 0; width: 100%; box-sizing: border-box;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 5%; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 191, 255, 0.3); z-index: 1000;
+        }
+
+        .header-logo { font-size: 1.4rem; font-weight: 700; color: var(--accent-color); text-decoration: none; }
+        .header-nav a { text-decoration: none; color: #e0e6f1; margin-left: 25px; font-size: 0.9rem; transition: 0.3s; }
+        .header-nav a:hover { color: var(--accent-color); }
+
+        .container { padding: 120px 5% 50px; width: 100%; box-sizing: border-box; }
+        h1 { text-align: center; margin-bottom: 10px; letter-spacing: 2px; font-weight: 600; text-transform: uppercase; color: var(--accent-color); }
+        .sub-title { text-align: center; color: #8a99af; margin-bottom: 40px; font-size: 0.9rem; }
+
+        /* Buttons & Controls */
+        .btn-container { text-align: center; margin-bottom: 40px; display: flex; justify-content: center; gap: 25px; align-items: center; flex-wrap: wrap; }
+        
+        .session-selector {
+            display: flex; align-items: center; gap: 12px; 
+            background: rgba(0,0,0,0.3); padding: 10px 25px; 
+            border-radius: 30px; border: 1px solid var(--glass-border);
+            backdrop-filter: blur(5px);
+        }
+
+        .input-field {
+            background: transparent; border: none; color: var(--accent-color); 
+            font-family: 'Poppins'; outline: none; cursor: pointer; font-weight: 600;
+        }
+
+        .action-btn {
+            padding: 12px 35px; background: transparent; border: 2px solid var(--accent-color); color: var(--accent-color);
+            border-radius: 30px; cursor: pointer; font-weight: 600; transition: 0.3s;
+            text-transform: uppercase; letter-spacing: 1px; font-family: 'Poppins';
+        }
+        .action-btn:hover { background: var(--accent-color); color: #0b1120; box-shadow: 0 0 25px rgba(0, 191, 255, 0.5); transform: translateY(-2px); }
+
+        /* Batch Grid */
+        .batches-row { display: flex; gap: 20px; justify-content: center; align-items: flex-start; flex-wrap: wrap; }
+        .batch-column { 
+            flex: 1; min-width: 280px; background: var(--glass); border-radius: 15px; 
+            border: 1px solid var(--glass-border); backdrop-filter: blur(10px); overflow: hidden; margin-bottom: 25px;
+        }
+
+        .batch-header { 
+            background: rgba(0, 191, 255, 0.15); color: var(--accent-color); padding: 15px; 
+            text-align: center; font-weight: 600; font-size: 1rem; border-bottom: 1px solid var(--glass-border); 
+        }
+
+        /* Tables */
+        table { width: 100%; border-collapse: collapse; }
+        th { padding: 12px; font-size: 0.75rem; text-transform: uppercase; background: rgba(0,0,0,0.3); color: #b0c4de; letter-spacing: 1px; }
+        td { padding: 10px; font-size: 0.85rem; border-bottom: 1px solid rgba(255, 255, 255, 0.05); text-align: center; }
+        tr:hover { background: rgba(255, 255, 255, 0.03); }
+
+        .cgpa-val { color: #00ff7f; font-weight: 600; }
+
+        #rawListContainer { display: none; animation: fadeIn 0.5s ease; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0b1120; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-color); }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <a href="/" class="header-logo">EDU-PMS</a>
+        <nav class="header-nav">
+            <a href="/">Home</a>
+            <a href="/admin_dashboard">Admin Dashboard</a>
+            <a href="/logout">Logout</a>
+        </nav>
+    </header>
+
+    <div class="bg-overlay"></div>
+
+    <div class="container">
+        <h1>Student Batch Allotment</h1>
+        <p class="sub-title">Reviewing Academic Session: <strong>{{ current_session }}</strong></p>
+
+        <div class="btn-container">
+            <div class="session-selector">
+                <label style="font-weight: 600; color: #8a99af; font-size: 0.85rem;">SESSION:</label>
+                <select class="input-field" onchange="location.href='/students_list?session=' + this.value">
+                    {% for s in sessions %}
+                        <option value="{{ s.upload_session }}" {% if s.upload_session == current_session %}selected{% endif %} style="background: #0b1120;">
+                            {{ s.upload_session }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button id="showAllBtn" class="action-btn">View Full RollList</button>
+        </div>
+
+        <div id="rawListContainer" class="batch-column" style="max-width: 900px; margin: 0 auto 50px auto;">
+            <div class="batch-header">Complete Academic Records: {{ current_session }}</div>
+            <div style="max-height: 400px; overflow-y: auto;">
+                <table>
+                    <thead>
+                        <tr><th>UID</th><th>Student Name</th><th>CGPA</th></tr>
+                    </thead>
+                    <tbody id="rawTableBody">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="batches-row">
+            {% for batch in batches %}
+            <div class="batch-column">
+                <div class="batch-header">{{ batch.name }}</div>
+                <table>
+                    <thead>
+                        <tr><th>UID</th><th>Name</th></tr>
+                    </thead>
+                    <tbody>
+                        {% for student in batch.data %}
+                        <tr>
+                            <td>{{ student.UID }}</td>
+                            <td>{{ student.SName }}</td>
+                        </tr>
+                        {% endfor %}
+                        {% if not batch.data %}
+                        <tr><td colspan="2" style="padding: 20px; color: #4a5568;">No data allocated</td></tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('showAllBtn').addEventListener('click', function() {
+            const container = document.getElementById('rawListContainer');
+            const btn = this;
+            const sessionDropdown = document.querySelector('select');
+            const currentSession = sessionDropdown ? sessionDropdown.value : "";
+
+            if (container.style.display === "none" || container.style.display === "") {
+                fetch(`/all_students_raw?session=${currentSession}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const tbody = document.getElementById('rawTableBody');
+                        tbody.innerHTML = ''; 
+                        
+                        if (data.students.length === 0) {
+                            tbody.innerHTML = '<tr><td colspan="3" style="padding:20px; color:#8a99af;">No records found.</td></tr>';
+                        } else {
+                            data.students.forEach(student => {
+                                const row = `<tr>
+                                    <td>${student.UID}</td>
+                                    <td style="text-align: left; padding-left: 30px;">${student.SName}</td>
+                                    <td class="cgpa-val">${student.CGPA}</td>
+                                </tr>`;
+                                tbody.innerHTML += row;
+                            });
+                        }
+                        
+                        container.style.display = "block";
+                        btn.innerText = "Hide RollList";
+                        container.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    })
+                    .catch(err => {
+                        console.error("Error:", err);
+                        alert("Could not load data.");
+                    });
+            } else {
+                container.style.display = "none";
+                btn.innerText = "View Full RollList";
+            }
+        });
+    </script>
+</body>
+</html>

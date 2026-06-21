@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard - PMS</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #0b1120;
+      color: #e0e6f1;
+      min-height: 100vh;
+    }
+
+    .bg-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #11001d 0%, rgb(27, 12, 52) 40%, #240859 100%);
+      z-index: -2;
+    }
+
+    .main-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 5%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 191, 255, 0.3);
+      z-index: 1000;
+    }
+
+    .header-logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #00bfff;
+      text-decoration: none;
+    }
+
+    .user-profile {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .container {
+      padding: 100px 5% 50px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .welcome-text { margin-bottom: 30px; }
+    .welcome-text h1 { font-size: 1.8rem; margin: 0; }
+
+    .main-content-grid {
+        display: grid;
+        grid-template-columns: 2.2fr 1fr;
+        gap: 30px;
+    }
+
+    .content-box {
+        background: rgba(0, 0, 0, 0.3);
+        padding: 25px;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        margin-bottom: 20px;
+    }
+
+    .content-box h3 {
+        margin-top: 0;
+        border-bottom: 1px solid rgba(0, 191, 255, 0.3);
+        padding-bottom: 10px;
+        font-size: 1.1rem;
+    }
+
+    .pref-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.8rem;
+        margin-top: 15px;
+    }
+    .pref-table th { color: #00bfff; padding: 10px 5px; }
+    .pref-table td { padding: 8px 5px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .pref-table td:first-child { text-align: left; font-weight: 600; width: 180px; }
+
+    .pref-checkbox { transform: scale(1.2); cursor: pointer; }
+    .pref-checkbox:disabled { opacity: 0.3; cursor: not-allowed; }
+
+    .team-member {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .member-img { width: 40px; height: 40px; border-radius: 50%; background: #300c55; border: 1px solid #00bfff; }
+    .member-info p { margin: 0; font-size: 0.85rem; }
+    .member-info span { font-size: 0.7rem; color: #00bfff; }
+
+    .btn {
+        display: block; width: 100%; padding: 12px; margin-top: 15px;
+        border-radius: 8px; border: none; cursor: pointer; font-weight: 600;
+        text-align: center; text-decoration: none; transition: 0.3s;
+    }
+    .btn-primary { background: #00bfff; color: #0b1120; }
+    .btn-secondary { background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); }
+    .btn:disabled { background: #444; color: #888; cursor: not-allowed; transform: none; }
+
+    .flash-msg {
+        background: rgba(0, 191, 255, 0.1);
+        border: 1px solid #00bfff;
+        padding: 12px;
+        border-radius: 10px;
+        color: #00bfff;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    @media (max-width: 900px) { .main-content-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <div class="bg-overlay"></div>
+
+  <header class="main-header">
+    <a href="/" class="header-logo">EDU-PMS</a>
+    <div class="user-profile">
+        <span>{{ group.leader.SName if (group and group.leader) else 'Student' }}</span>
+        <div class="member-img"></div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="welcome-text">
+        <h1>Dashboard / Team Analysis</h1>
+    </div>
+
+    <div class="main-content-grid">
+        <div class="content-box">
+            <h3>Mentor Preference Form</h3>
+            
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <div class="flash-msg">{{ messages[0] }}</div>
+              {% endif %}
+            {% endwith %}
+
+            {% if submitted %}
+                <div style="background: rgba(0, 255, 136, 0.1); border: 1px solid #00ff88; padding: 15px; border-radius: 10px; text-align: center; color: #00ff88;">
+                    <strong>✅ Submission Received</strong><br>
+                    <small>Your preferences are locked and sent to Admin for priority allocation.</small>
+                </div>
+            {% endif %}
+
+            <p style="font-size:0.85rem; color:#b0c4de; margin-top:15px;">
+                * Only the Team Leader (Batch 1) can submit this form. 
+                * Each mentor and preference number must be unique.
+            </p>
+
+            <form action="/submit_preferences" method="POST" id="mentorPrefForm">
+                <input type="hidden" name="group_id" value="{{ group.id if group else '' }}">
+                
+                <table class="pref-table">
+                    <thead>
+                        <tr>
+                            <th>Mentor Name</th>
+                            {% for i in range(1, 10) %} <th>P{{i}}</th> {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% set mentors = [
+                            (1, 'Dr. Manish Gudadhe'), (2, 'Prof. Abhinav Muley'), (3, 'Dr. Jayshri Harde'),
+                            (4, 'Dr. Ashish Dandekar'), (5, 'Prof. Leena Mandurkar'), (6, 'Prof. Bhagyashree Hambarde'),
+                            (7, 'Dr. Tejal Irkhede'), (8, 'Prof. Kalyani Satone'), (9, 'Dr. Nischal Puri')
+                        ] %}
+
+                        {% for id, name in mentors %}
+                        <tr>
+                            <td>{{ name }}</td>
+                            {% for p in range(1, 10) %}
+                            <td>
+                                <input type="checkbox" class="pref-checkbox" 
+                                       data-mentor="{{id}}" data-pref="{{p}}"
+                                       {% if submitted or not group or session['user_id']|string != group.leader.UID|string %}disabled{% endif %}
+                                       {% if group and group.preferences and group.preferences[id|string]|int == p %}checked{% endif %}>
+                            </td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <button type="submit" class="btn btn-primary" 
+                        {% if submitted or not group or session['user_id']|string != group.leader.UID|string %}disabled{% endif %}>
+                    Confirm Preferences
+                </button>
+            </form>
+        </div>
+
+
+        <div class="content-box" style="border-color: var(--accent-purple);">
+    <h3>Project Proposal Slot</h3>
+    
+    {% set props = load_json('proposals.json', {}) %}
+    {% set my_prop = props.get(session['user_session'], {}).get(group.id|string) %}
+
+    {% if my_prop %}
+        <div style="padding: 15px; background: rgba(255,255,255,0.05); border-radius: 12px; margin-bottom: 15px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-size: 0.7rem; color: #b0c4de;">STATUS</span>
+                <span style="font-size: 0.75rem; font-weight: 700; color: {% if my_prop.status == 'Accepted' %}#00ff88{% elif my_prop.status == 'Rejected' %}#ff4d4d{% else %}#ffcc00{% endif %};">
+                    {{ my_prop.status | upper }}
+                </span>
+            </div>
+            <h4 style="margin: 10px 0 5px 0; color: #fff; font-size: 0.95rem;">{{ my_prop.title }}</h4>
+            <p style="font-size: 0.8rem; color: #8a99af; margin: 0;">{{ my_prop.aim[:100] }}...</p>
+            
+            {% if my_prop.admin_feedback %}
+                <div style="margin-top: 10px; font-size: 0.75rem; color: #ff4d4d; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 5px;">
+                    <strong>Admin:</strong> {{ my_prop.admin_feedback }}
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    {% if not my_prop or my_prop.status == 'Rejected' %}
+        <form action="/submit_proposal" method="POST">
+            <input type="hidden" name="group_id" value="{{ group.id }}">
+            <input type="text" name="title" placeholder="Project Title" required 
+                   style="width: 100%; padding: 10px; margin-bottom: 10px; background: rgba(0,0,0,0.3); border: 1px solid rgba(188, 111, 241, 0.3); color: #fff; border-radius: 8px;">
+            <textarea name="aim" placeholder="Aim & Objectives..." rows="3" required
+                      style="width: 100%; padding: 10px; background: rgba(0,0,0,0.3); border: 1px solid rgba(188, 111, 241, 0.3); color: #fff; border-radius: 8px; font-family: Poppins;"></textarea>
+            <button type="submit" class="btn" style="background: var(--accent-purple); color: #fff; margin-top: 10px;">
+                {% if my_prop and my_prop.status == 'Rejected' %}Resubmit Proposal{% else %}Submit Proposal{% endif %}
+            </button>
+        </form>
+    {% else %}
+        <p style="font-size: 0.75rem; color: #8a99af; text-align: center; font-style: italic;">
+            Proposal is under review or accepted. Editing locked.
+        </p>
+    {% endif %}
+</div>
+
+        <div class="content-box">
+            <h3>Team Status</h3>
+
+            {% if group %}
+                <div class="team-member">
+                    <div class="member-img" style="border-color: #00ff88;"></div>
+                    <div class="member-info">
+                        <p>{{ group.leader.SName }}</p>
+                        <span style="color:#00ff88;">Team Leader (Batch 1)</span>
+                    </div>
+                </div>
+
+                {% for m in group.members %}
+                    {% if m %}
+                    <div class="team-member">
+                        <div class="member-img"></div>
+                        <div class="member-info">
+                            <p>{{ m.SName }}</p>
+                            <span>Member (Batch {{ loop.index + 1 }})</span>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+
+                <div style="margin-top: 30px; padding: 20px; background: rgba(0, 191, 255, 0.05); border-radius: 15px; border: 1px dashed #00bfff;">
+                    <h4 style="margin:0; font-size: 0.8rem; color: #00bfff;">FINAL MENTOR ALLOCATION</h4>
+                    {% if locked and group.mentor_name %}
+                        <p style="margin: 10px 0 0 0; font-weight: 700; color: #fff; font-size: 1.1rem;">{{ group.mentor_name }}</p>
+                    {% else %}
+                        <p style="margin: 10px 0 0 0; color: #8a99af; font-size: 0.85rem;">⏳ Pending Admin Finalization...</p>
+                    {% endif %}
+                </div>
+
+            {% else %}
+                <p style="color:#b0c4de; font-size:0.9rem;">No group data available.</p>
+            {% endif %}
+
+            <a href="{{ url_for('chat', session_name=session['user_session'], group_id=group.id) }}" style="display: block; color: wheat; background-color: #00bfff; border: #240859; width: 100%; text-align: center; padding: 10px; text-decoration: none; margin-top: 20px; font-weight: 400;">💬 Chat</a>
+            <div style="margin-top: 40px;">
+                <a href="/logout" class="btn btn-secondary" style="color: #ff4d4d; border-color: #ff4d4d33;">Logout System</a>
+            </div>
+        </div>
+    </div>
+  </div>
+
+<script>
+const checkboxes = document.querySelectorAll(".pref-checkbox");
+const form = document.getElementById("mentorPrefForm");
+
+checkboxes.forEach(cb => {
+    cb.addEventListener("change", function() {
+        const mentor = this.dataset.mentor;
+        const pref = this.dataset.pref;
+
+        if (this.checked) {
+            document.querySelectorAll(`.pref-checkbox[data-mentor="${mentor}"]`).forEach(box => {
+                if (box !== this) box.checked = false;
+            });
+
+            document.querySelectorAll(`.pref-checkbox[data-pref="${pref}"]`).forEach(box => {
+                if (box !== this) box.checked = false;
+            });
+        }
+    });
+});
+
+form.addEventListener("submit", function(e) {
+    let selectedCount = 0;
+    document.querySelectorAll(".generated-hidden-pref").forEach(x => x.remove());
+
+    document.querySelectorAll(".pref-checkbox:checked").forEach(cb => {
+        selectedCount++;
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = "mentor_" + cb.dataset.mentor;
+        input.value = cb.dataset.pref;
+        input.className = "generated-hidden-pref";
+        form.appendChild(input);
+    });
+
+    if (selectedCount === 0) {
+        e.preventDefault();
+        alert("Please select at least one mentor preference before submitting.");
+    }
+});
+</script>
+</body>
+</html>
