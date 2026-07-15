@@ -1,1 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Access | EDU-PMS</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
+        * {
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            background: #0b1120;
+            background: radial-gradient(circle at center, #1e0b36 0%, #0b1120 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* --- Animated Background Bubbles --- */
+        body::before, body::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #bc6ff1 0%, #892cdc 100%);
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.3;
+            animation: float 10s infinite alternate;
+        }
+        body::after {
+            bottom: -50px;
+            right: -50px;
+            background: #00bfff;
+            animation-delay: -5s;
+        }
+        @keyframes float {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            padding: 40px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-card h2 {
+            margin: 0 0 10px 0;
+            font-size: 1.8rem;
+            color: #fff;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .login-card p {
+            color: #8a99af;
+            font-size: 0.85rem;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.75rem;
+            color: #bc6ff1;
+            margin-bottom: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #bc6ff1;
+            box-shadow: 0 0 15px rgba(188, 111, 241, 0.2);
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            background: linear-gradient(135deg, #bc6ff1 0%, #892cdc 100%);
+            color: white;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+            box-shadow: 0 10px 20px rgba(137, 44, 220, 0.3);
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 25px rgba(137, 44, 220, 0.5);
+            filter: brightness(1.1);
+        }
+
+        .error-message {
+            background: rgba(255, 77, 77, 0.1);
+            color: #ff4d4d;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 77, 77, 0.2);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 25px;
+            font-size: 0.8rem;
+            color: #8a99af;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .back-link:hover {
+            color: #fff;
+        }
+
+        .footer-brand {
+            margin-top: 30px;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.2);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-card">
+    <h2>Student Login</h2>
+    <p>Enter your credentials to access the PMS portal</p>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="error-message">⚠️ {{ messages[0] }}</div>
+    {% endif %}
+    {% endwith %}
+
+    <form action="/stu_login" method="POST">
+        <div class="input-group">
+            <label>ID</label>
+            <input type="text" name="uid" required>
+        </div>
+
+        <div class="input-group">
+            <label>Password</label>
+            <input type="password" name="password"required>
+        </div>
+
+        <button type="submit" class="login-btn">
+            ACCESS DASHBOARD
+        </button>
+    </form>
+
+    <a href="/" class="back-link">← Back to Main Portal</a>
+    
+    <div class="footer-brand">
+        Project Management System
+    </div>
+</div>
+
+</body>
+</html>
