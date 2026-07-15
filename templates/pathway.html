@@ -1,1 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project History - PMS</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #0b1120;
+      color: #e0e6f1;
+      min-height: 100vh;
+    }
+
+    .bg-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #19032a 0%, rgb(53, 22, 99) 40%, #678fd4 100%);
+      z-index: -2;
+    }
+
+    /* Header */
+    .main-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 5%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 191, 255, 0.3);
+      z-index: 1000;
+    }
+
+    .header-logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #00bfff;
+      text-decoration: none;
+    }
+
+    .header-nav a {
+      text-decoration: none;
+      color: #e0e6f1;
+      margin-left: 25px;
+      font-size: 0.9rem;
+    }
+
+    /* Timeline Container */
+    .container {
+      padding: 120px 5% 50px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .page-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .page-title h1 { font-size: 2.5rem; margin-bottom: 10px; }
+    .page-title p { color: #00bfff; }
+
+    /* The Timeline Line */
+    .timeline {
+      position: relative;
+      padding: 20px 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 0;
+      width: 2px;
+      height: 100%;
+      background: rgba(0, 191, 255, 0.3);
+    }
+
+    /* Timeline Items */
+    .timeline-item {
+      position: relative;
+      margin-bottom: 40px;
+      padding-left: 60px;
+      animation: slideIn 0.8s ease forwards;
+      opacity: 0;
+    }
+
+    .timeline-item:nth-child(1) { animation-delay: 0.2s; }
+    .timeline-item:nth-child(2) { animation-delay: 0.4s; }
+    .timeline-item:nth-child(3) { animation-delay: 0.6s; }
+
+    /* The Dot on the line */
+    .timeline-dot {
+      position: absolute;
+      left: 11px;
+      top: 5px;
+      width: 20px;
+      height: 20px;
+      background: #00bfff;
+      border-radius: 50%;
+      box-shadow: 0 0 15px #00bfff;
+      z-index: 2;
+    }
+
+    /* The Card Content */
+    .timeline-content {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 20px;
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      transition: 0.3s;
+    }
+
+    .timeline-content:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: #00bfff;
+        transform: scale(1.02);
+    }
+
+    .date {
+      font-size: 0.8rem;
+      color: #00bfff;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      display: block;
+    }
+
+    .timeline-content h3 { margin: 5px 0; font-size: 1.2rem; }
+    .timeline-content p { font-size: 0.9rem; color: #b0c4de; margin: 10px 0; line-height: 1.5; }
+
+    .status-badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+
+    .status-completed { background: rgba(0, 255, 127, 0.2); color: #00ff7f; border: 1px solid #00ff7f; }
+    .status-pending { background: rgba(255, 165, 0, 0.2); color: #ffa500; border: 1px solid #ffa500; }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-overlay"></div>
+
+  <header class="main-header">
+    <a href="index.html" class="header-logo">EDU-PMS</a>
+    <nav class="header-nav">
+        <a href="welcome.html">Home</a>
+        <a href="faculty_details.html">Faculty Details</a>
+        <a href="student_interface.html">Dashboard</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="page-title">
+        <h1>Project History</h1>
+        <p>Tracking milestones for "Authentication & Analysis Based Management System"</p>
+    </div>
+
+    <div class="timeline">
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="date">Feb 10, 2026</span>
+                <h3>Frontend Interface Design</h3>
+                <p>Completed the main landing page, faculty details, and student dashboard layout using HTML, CSS, and JS.</p>
+                <span class="status-badge status-completed">Completed</span>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="date">Feb 05, 2026</span>
+                <h3>SRS Documentation</h3>
+                <p>Software Requirement Specification submitted to Prof. Abhinav Muley for review.</p>
+                <span class="status-badge status-completed">Approved</span>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="date">Jan 28, 2026</span>
+                <h3>Group Formation</h3>
+                <p>Team members identified and project title registered under the CSE Data Science department.</p>
+                <span class="status-badge status-completed">Verified</span>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div class="timeline-dot" style="background: #ffa500; box-shadow: 0 0 15px #ffa500;"></div>
+            <div class="timeline-content">
+                <span class="date">Upcoming</span>
+                <h3>Database Integration (SQL)</h3>
+                <p>Setting up the authentication backend and linking user data to the management system.</p>
+                <span class="status-badge status-pending">In Progress</span>
+            </div>
+        </div>
+    </div>
+  </div>
+
+</body>
+</html>
