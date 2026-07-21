@@ -7,7 +7,7 @@ import csv
 from io import TextIOWrapper
 from datetime import datetime
 
-app = Flask(__name__),.,.
+app = Flask(__name__)
 app.secret_key = "pms_secret_key_123"
 
 # Configurations
