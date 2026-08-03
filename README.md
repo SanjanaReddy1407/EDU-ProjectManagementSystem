@@ -1,4 +1,2 @@
 # EDU-ProjectManagementSystem
 
-
-
