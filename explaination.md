@@ -50,7 +50,7 @@ Isey direct apni `README.md` file mein replace/paste kar lo:
 * **Project Title:** Authentication, Analysis based Group Management System
 * **Project Guides:** Prof. Kalyani Satone | Prof. Abhinav Muley
 * **Project Team (Projectees):**
-  * S. V. Reddy
+  * Sanjana Reddy
   * Harshal Kature
   * Harsh Pathale
   * Sushil Dongre
