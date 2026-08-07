@@ -25,24 +25,26 @@ Traditional academic project management relies heavily on manual file uploads, u
 
 The application follows a modular Model-View-Controller (MVC) software design pattern built on top of a lightweight, highly responsive WSGI architecture.
 
-              +-----------------------------------+
-              |        Client Browser UI          |
-              |  (HTML5 / CSS3 / Vanilla JS API)  |
-              +-----------------+-----------------+
-                                |
-                                | HTTP Requests (REST / JSON)
-                                v
-              +-----------------------------------+
-              |         Flask Controller          |
-              |     (Routing & Session Auth)      |
-              +-----------------+-----------------+
-                                |
-    +---------------------------+---------------------------+
-    |                                                       |
-    v                                                       v
-+-------------------------------+               +-------------------------------+
-|      Core Logic Modules       |               |     Database Storage Layer    |
-| - Merit Auto-Tiering          |               | - CSV / SQLite Data Repos     |
-| - Priority Matching Algorithm |<------------->| - Historical Project Records  |
-| - Proposal Lock Engine        |               | - Session Tracking Stores     |
-+-------------------------------+               +-------------------------------+
+                       +-----------------------------------+
+                       |        Client Browser UI          |
+                       |  (HTML5 / CSS3 / Vanilla JS API)  |
+                       +-----------------+-----------------+
+                                         |
+                                         | HTTP Requests (REST / JSON)
+                                         v
+                       +-----------------------------------+
+                       |         Flask Controller          |
+                       |     (Routing & Session Auth)      |
+                       +-----------------+-----------------+
+                                         |
+                +-----------------------+---------------------------+
+                |                                                   |
+                v                                                   v
+    +-------------------------------+               +-------------------------------+
+    |      Core Logic Modules       |               |     Database Storage Layer    |
+    | - Merit Auto-Tiering          |               | - CSV / SQLite Data Repos     |
+    | - Priority Matching Algorithm |<------------->| - Historical Project Records  |
+    | - Proposal Lock Engine        |               | - Session Tracking Stores     |
+    +-------------------------------+               +-------------------------------+
+
+    
