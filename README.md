@@ -54,26 +54,16 @@ The application follows a modular Model-View-Controller (MVC) software design pa
 
 ### 1. Overall System Lifecycle Flowchart
 
-[ Admin Data Ingestion (CSV Upload) ]
-│
-▼
-[ System Tiering Logic Execution ] ──► (Classifies Students into Tiers 1-4)
-│
-▼
-[ Automated Balanced Group Formation ] ──► (1 High Merit Leader + 3 Members)
-│
-▼
-[ Student Leader Preference Submission ] ──► (Ranked Preference P1-P9)
-│
-▼
-[ Meritocratic Priority Allotment ] ──► (Supervisor Allotted & Locked)
-│
-▼
-[ Proposal & Title Review Module ] ──► (Mentor Accept/Reject + Feedback)
-│
-▼
-[ Collaboration & QR Portfolio Generation ] ──► (Archived with Permanent Identity)
-
+```mermaid
+graph TD
+    A[Admin Data Ingestion <br> CSV Upload] --> B[System Tiering Logic Execution]
+    B -->|Classifies Students into Tiers 1-4| C[Automated Balanced Group Formation]
+    C -->|1 High Merit Leader + 3 Members| D[Student Leader Preference Submission]
+    D -->|Ranked Preference P1-P9| E[Meritocratic Priority Allotment]
+    E -->|Supervisor Allotted & Locked| F[Proposal & Title Review Module]
+    F -->|Mentor Accept/Reject + Feedback| G[Collaboration & QR Portfolio Generation]
+    G --> H[Archived with Permanent Identity]
+```
 ---
 
 ## 🧮 Core Algorithms
