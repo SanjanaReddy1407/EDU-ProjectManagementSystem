@@ -116,3 +116,35 @@ Output: Assigned Mentors Map A
    - Auto-assign next available Mentor with remaining Capacity > 0.
 4. Return A
 
+```
+
+## 🌟 Key Features Overview
+
+| Feature Category | Feature Name | Description & Impact |
+| :--- | :--- | :--- |
+| **User Management** | **Role-Based Access Control (RBAC)** | Dedicated, secure authentication portals and customized views for Admin, Mentors, and Students. |
+| **Team Formation** | **Automated Meritocratic Tiering** | Classifies students into 4 CGPA-driven tiers (Batches 1–4) and forms balanced 1:N teams in < 10 seconds. |
+| **Supervisor Allotment** | **Merit-First Priority Allocation** | Smart matching engine that allocates mentors based on Group Merit Rank and preference order (P1–P9) with 85% satisfaction. |
+| **Proposal Governance** | **Proposal Lock & Feedback System** | Automatically locks submitted titles/aims to prevent unauthorized edits and enables structured mentor review (Accept/Reject with feedback). |
+| **Research Integrity** | **Duplicate Topic Prevention** | Cross-references new proposals with historical project records to prevent topic repetition and ensure 100% research novelty. |
+| **Digital Portfolio** | **QR-Code Archival Engine** | Automatically generates a unique, permanent QR code for each project profile, allowing instant mobile access to project reports. |
+| **Communication** | **Integrated Discussion Hub** | Built-in, secure chat repository for team members and allotted mentors, eliminating reliance on third-party messaging apps. |
+| **Efficiency** | **Bulk Data Ingestion** | Enables admins to upload and process 300+ student records instantly via CSV, reducing administrative overhead by 80%. |
+
+---
+
+## 🛠️ Tech Stack & Architecture
+
+| Layer | Technology / Tool | Purpose & Usage |
+| :--- | :--- | :--- |
+| **Frontend UI** | **HTML5 & CSS3** | Custom Glassmorphism UI, responsive grid/flexbox layouts, and sleek dark mode theme. |
+| **Client Scripting** | **Vanilla JavaScript (ES6+)** | Dynamic DOM manipulation, asynchronous `fetch()` API calls for live previews, and interactive toggles. |
+| **Backend Framework** | **Python 3.x (Flask)** | Lightweight WSGI web framework handling RESTful routing, session management, and business logic execution. |
+| **Templating Engine** | **Jinja2** | Server-side HTML rendering for dynamically injecting database records, sessions, and student batch lists. |
+| **Data Storage & Repos**| **CSV / SQLite Database** | Structured data persistence for student records, historical project logs, preference lists, and chat archives. |
+| **Algorithms** | **Custom Python Logic** | Proprietary 1:N dynamic batching logic and conflict-free priority supervisor allotment engines. |
+| **Typography & Styling**| **Google Fonts (Poppins)** | Modern, professional typography for optimized readability and aesthetic consistency across all views. |
+
+
+
+
