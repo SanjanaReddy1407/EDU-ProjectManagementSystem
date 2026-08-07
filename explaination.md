@@ -102,24 +102,7 @@ To maintain equity across all groups, student records are auto-classified into f
 
 ---
 
-## 📈 Program Outcomes (POs) Mapping
 
-EDU-PMS aligns directly with the following National Board of Accreditation (NBA) Program Outcomes:
-
-* **PO1: Engineering Knowledge** - Applying systematic algorithmic models to solve operational academic workflows.
-* **PO2: Problem Analysis** - Analyzing group polarization issues and addressing favoritism in mentor allotment.
-* **PO3: Design/Development of Solutions** - Engineering an end-to-end multi-role web platform for educational management.
-* **PO4: Conduct Investigations of Complex Problems** - Implementing historical data analysis for topic deduplication.
-* **PO5: Modern Tool Usage** - Utilizing modern web stacks (Flask, JS, Glassmorphism CSS) and QR-code tracking.
-* **PO6: The Engineer and Society** - Enhancing organizational transparency and administrative integrity.
-* **PO7: Environment and Sustainability** - Reducing paper waste through 100% digital proposal submissions and approvals.
-* **PO8: Ethics** - Eliminating manual bias, favoritism, and unauthorized project topic duplication.
-* **PO9: Individual and Team Work** - Structuring 1:N cross-tier group dynamics for optimal peer learning.
-* **PO10: Communication** - Providing a centralized Discussion Hub for structured student-mentor interaction.
-* **PO11: Project Management and Finance** - Automating tracking, feedback loops, and resource optimization.
-* **PO12: Life-long Learning** - Creating permanent, scan-able QR digital portfolios for ongoing career utility.
-
----
 
 ## 🌟 Key Results & Impact
 
