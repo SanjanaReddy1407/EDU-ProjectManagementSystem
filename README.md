@@ -73,3 +73,46 @@ The application follows a modular Model-View-Controller (MVC) software design pa
 │
 ▼
 [ Collaboration & QR Portfolio Generation ] ──► (Archived with Permanent Identity)
+
+---
+
+## 🧮 Core Algorithms
+
+### 1. Meritocratic Batching Algorithm (1:N Tier Distribution)
+
+To prevent skill isolation, students are sorted into 4 CGPA-driven quartiles (Batches 1 to 4). The system pulls exactly one high-performing student as a Leader and three cross-tier students as Members.
+
+```text
+Algorithm: BalancedTeamFormation
+Input: Student Records S with CGPA
+Output: Balanced Teams List T
+
+1. Sort S in descending order based on CGPA.
+2. Divide S into 4 equal segments:
+   - Batch_1 (Tier 1: HighCGPA)
+   - Batch_2 (Tier 2: Mid-High CGPA)
+   - Batch_3 (Tier 3: Mid-Low CGPA)
+   - Batch_4 (Tier 4: Low CGPA)
+3. For i = 1 to length(Batch_1):
+   - Group G_i = { Leader: Batch_1[i], Member1: Batch_2[i], Member2: Batch_3[i], Member3: Batch_4[i] }
+   - Append G_i to T
+4. Return T
+
+
+Algorithm: MeritPriorityAllocation
+Input: Group Preferences P, Mentor Slot Capacity C, Group Merit Rank R
+Output: Assigned Mentors Map A
+
+1. Sort Groups in descending order based on Group Merit Rank R.
+2. For each Group G in sorted Groups:
+   - For choice p in G.Preferences (P1 to P9):
+     - If Capacity(p) > 0:
+       - Assign Mentor p to Group G
+       - Decrement Capacity(p) by 1
+       - Break to next Group
+     - Else:
+       - Continue to next choice (p+1)
+3. If Group G has no mentor assigned:
+   - Auto-assign next available Mentor with remaining Capacity > 0.
+4. Return A
+
