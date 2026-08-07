@@ -48,3 +48,28 @@ The application follows a modular Model-View-Controller (MVC) software design pa
     +-------------------------------+               +-------------------------------+
 
     
+---
+
+## 📊 Process Flowcharts
+
+### 1. Overall System Lifecycle Flowchart
+
+[ Admin Data Ingestion (CSV Upload) ]
+│
+▼
+[ System Tiering Logic Execution ] ──► (Classifies Students into Tiers 1-4)
+│
+▼
+[ Automated Balanced Group Formation ] ──► (1 High Merit Leader + 3 Members)
+│
+▼
+[ Student Leader Preference Submission ] ──► (Ranked Preference P1-P9)
+│
+▼
+[ Meritocratic Priority Allotment ] ──► (Supervisor Allotted & Locked)
+│
+▼
+[ Proposal & Title Review Module ] ──► (Mentor Accept/Reject + Feedback)
+│
+▼
+[ Collaboration & QR Portfolio Generation ] ──► (Archived with Permanent Identity)
