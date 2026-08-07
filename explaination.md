@@ -1,4 +1,3 @@
----
 
 ## 📊 Academic Distribution Analysis
 The system automatically parses and balances student datasets across four equal quartiles:
@@ -75,36 +74,18 @@ EDU-PMS is a secure, analytics-driven web platform designed to manage college pr
 
 The following step-by-step pipeline represents the core operational lifecycle of the platform:
 
-[ 1. Project Initiation & Admin Login ]
-│  └─ Secure Role-Based Access Control
-▼
-[ 2. Data Ingestion ]
-│  └─ Admin uploads Student records via CSV (Name, UID, CGPA)
-▼
-[ 3. Auto-Tiering Engine ]
-│  └─ Executes CGPA-driven classification into 4 Merit Tiers (Batch 1 to 4)
-▼
-[ 4. Balanced Grouping (1:N Logic) ]
-│  └─ Automated algorithm forms teams: 1 High-Merit Leader + 3 Balanced Members
-▼
-[ 5. Preference Submission ]
-│  └─ Group Leaders submit ranked choices (P1-P9) of preferred mentors with conflict-free validation
-▼
-[ 6. Smart Allocation Algorithm ]
-│  └─ Novel Priority Algorithm processes requests based on Group Merit to allot best available mentor
-▼
-[ 7. Proposal Management ]
-│  └─ Groups submit Project Titles & Aims with automatic form locking upon submission
-▼
-[ 8. Mentor Review Module ]
-│  └─ Supervisors access dedicated module to 'Accept' or 'Reject' proposals with feedback
-▼
-[ 9. Integrated Discussion Hub ]
-│  └─ Secure, zero-latency internal chat initialization for all allotted group members
-▼
-[ 10. Archival & Finalization ]
-└─ Final status permanently updated in database with QR-Code digital portfolio generation
-
+```mermaid
+graph TD
+    A[1. Project Initiation & Admin Login<br><i>Secure Role-Based Access Control</i>] --> B[2. Data Ingestion<br><i>CSV Upload: Name, UID, CGPA</i>]
+    B --> C[3. Auto-Tiering Engine<br><i>CGPA Classification into 4 Tiers</i>]
+    C --> D[4. Balanced Grouping 1:N Logic<br><i>1 Leader + 3 Members</i>]
+    D --> E[5. Preference Submission<br><i>Ranked Choices P1-P9</i>]
+    E --> F[6. Smart Allocation Algorithm<br><i>Priority Allotment via Group Merit</i>]
+    F --> G[7. Proposal Management<br><i>Title/Aim Submission & Lock</i>]
+    G --> H[8. Mentor Review Module<br><i>Accept/Reject + Digital Feedback</i>]
+    H --> I[9. Integrated Discussion Hub<br><i>In-Platform Group Chat</i>]
+    I --> J[10. Archival & Finalization<br><i>QR-Code Portfolio Generation</i>]
+```
 
 ---
 
@@ -112,11 +93,12 @@ The following step-by-step pipeline represents the core operational lifecycle of
 
 To maintain equity across all groups, student records are auto-classified into four equal 25% quartiles:
 
-+-------------------------------------------------------+
-|  Batch 1 (25%)  |  Batch 2 (25%)  |  Batch 3 (25%)  |  Batch 4 (25%)  |
-|  (High Merit)   |  (Mid-High)     |  (Mid-Low)      |  (Low Merit)    |
-+-------------------------------------------------------+
-
+| Batch Tier | Student Grouping Percentage | Merit Level | Role in Team |
+| :--- | :--- | :--- | :--- |
+| **Batch 1** | 25% | High Merit | Team Leader |
+| **Batch 2** | 25% | Mid-High Merit | Team Member 1 |
+| **Batch 3** | 25% | Mid-Low Merit | Team Member 2 |
+| **Batch 4** | 25% | Low Merit | Team Member 3 |
 
 ---
 
